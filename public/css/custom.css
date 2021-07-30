@@ -1,0 +1,14 @@
+nav.navbar {
+    background-color: #cccccc;
+}
+.navbar li a {
+    color: #000;
+}
+.navbar .navbar-brand {
+    color: #000;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.navbar li a.active {
+    text-shadow: 1px 1px grey;
+}
