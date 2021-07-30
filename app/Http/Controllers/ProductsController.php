@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\User;
 
 class ProductsController extends Controller
 {
@@ -13,7 +15,8 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        return view('pages.products.products');
+        $products = Product::all();
+        return view('pages.products.products')->with('products', $products);
     }
 
     /**
@@ -23,7 +26,8 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('pages.products.create');
+        $users = User::where('type', 'supplier')->get();
+        return view('pages.products.create')->with('users', $users);
     }
 
     /**
@@ -34,7 +38,25 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'supplier' => 'required',
+            'description' => 'required',
+            'quantity' => 'required|integer',
+            'price' => 'required|integer',
+            'reorderQuantity' => 'required|integer'
+        ]);
+
+        $product = new Product;
+        $product->name = $request->input('name');
+        $product->supplier = $request->input('supplier');
+        $product->description = $request->input('description');
+        $product->quantity = $request->input('quantity');
+        $product->price = $request->input('price');
+        $product->reorderQuantity = $request->input('reorderQuantity');
+        $product->save();
+
+        return redirect('/products')->with('success', 'Product added successfully');
     }
 
     /**
@@ -56,7 +78,14 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $users = User::where('type', 'supplier')->get();
+        $product = Product::find($id);
+        return view('pages.products.edit')->with(
+            array(
+                'product' => $product,
+                'users' => $users
+            )
+        );
     }
 
     /**
@@ -68,7 +97,25 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'supplier' => 'required',
+            'description' => 'required',
+            'quantity' => 'required|integer',
+            'price' => 'required|integer',
+            'reorderQuantity' => 'required|integer'
+        ]);
+
+        $product = Product::find($id);
+        $product->name = $request->input('name');
+        $product->supplier = $request->input('supplier');
+        $product->description = $request->input('description');
+        $product->quantity = $request->input('quantity');
+        $product->price = $request->input('price');
+        $product->reorderQuantity = $request->input('reorderQuantity');
+        $product->save();
+
+        return redirect('/products')->with('success', 'Product edited successfully');
     }
 
     /**
@@ -79,6 +126,8 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        $product->delete();
+        return redirect('/products')->with('success', 'Product deleted successfully');
     }
 }

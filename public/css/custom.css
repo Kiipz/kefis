@@ -64,6 +64,12 @@ nav.navbar {
 }
 
 /* DASHBOARD */
+.card-body-icon i {
+    font-size: 60px;
+    position: relative;
+    float: right;
+    opacity: 0.3;
+}
 
 /* PRODUCTS */
 

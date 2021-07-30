@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="page-header mt-2">
                 <p>
-                    <a href="{{ asset('dashboard') }}">Home</a> / <a href="{{ asset('orders') }}">Orders</a>
+                    <a href="{{ asset('dashboard') }}">Home</a> / <span style="color: #ffa500; text-shadow: 1px 1px #808080;">Orders</span>
                 </p>
             </div>
             <div class="container">

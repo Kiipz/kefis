@@ -11,17 +11,28 @@
 </head>
 <body>
     @include('inc.navbar')
+    @if ($errors->any())
+        <div class="myalert-success" style="background-color: red;">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     @if ($message = Session::get('success'))
         <div class="myalert-success">
             <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
             <strong>{{ $message }}</strong>
         </div>
-        <script>
-            setTimeout(function(){
-                $('.myalert-success').fadeOut(1000);
-            }, 4000);
-        </script>
     @endif
+    <script>
+        setTimeout(function(){
+            $('.myalert-success').fadeOut(1000);
+        }, 4000);
+    </script>
     @yield('content')
     <script src="{{ asset('js/app.js') }}"></script>
 </body>

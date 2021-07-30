@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Hash;
 use Session;
 use App\Models\User;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 
 class CustomAuthController extends Controller
@@ -72,7 +73,14 @@ class CustomAuthController extends Controller
     public function dashboard()
     {
         if(Auth::check()){
-            return view('pages.dashboard');
+            $products = Product::all();
+            $users = User::all();
+            return view('pages.dashboard')->with(
+                array(
+                    'products' => $products,
+                    'users' => $users
+                )
+            );
         }
   
         return redirect("login")->withSuccess('You are not allowed to access');

@@ -27,5 +27,5 @@ Route::get('signout', 'App\Http\Controllers\CustomAuthController@signOut')->name
 
 // pages routes
 Route::resource('products', 'App\Http\Controllers\ProductsController')->middleware('auth');
-Route::resource('suppliers', 'App\Http\Controllers\SuppliersController')->middleware('auth');
+Route::resource('users', 'App\Http\Controllers\UsersController')->middleware('auth');
 Route::resource('orders', 'App\Http\Controllers\OrdersController')->middleware('auth');

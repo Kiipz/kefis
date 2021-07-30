@@ -13,7 +13,7 @@
             <a class="nav-link {{ (request()->is('products*')) ? 'active' : '' }}" href="{{ asset('products') }}">Products</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ (request()->is('suppliers*')) ? 'active' : '' }}" href="{{ asset('suppliers') }}">Suppliers</a>
+            <a class="nav-link {{ (request()->is('users*')) ? 'active' : '' }}" href="{{ asset('users') }}">Users</a>
           </li>
           <li class="nav-item">
             <a class="nav-link {{ (request()->is('orders*')) ? 'active' : '' }}" href="{{ asset('orders') }}">Orders</a>
