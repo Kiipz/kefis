@@ -11,6 +11,17 @@
 </head>
 <body>
     @include('inc.navbar')
+    @if ($message = Session::get('success'))
+        <div class="myalert-success">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <strong>{{ $message }}</strong>
+        </div>
+        <script>
+            setTimeout(function(){
+                $('.myalert-success').fadeOut(1000);
+            }, 4000);
+        </script>
+    @endif
     @yield('content')
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
