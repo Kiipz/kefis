@@ -1,6 +1,9 @@
 ### Framework 
 - Laravel
 
+### Database
+- PostgreSQL
+
 ### Test command
 - php artisan test
 
