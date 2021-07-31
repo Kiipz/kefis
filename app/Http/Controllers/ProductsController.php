@@ -42,7 +42,6 @@ class ProductsController extends Controller
             'name' => 'required',
             'supplier' => 'required',
             'description' => 'required',
-            'quantity' => 'required|integer',
             'price' => 'required|integer',
             'reorderQuantity' => 'required|integer'
         ]);
@@ -51,7 +50,7 @@ class ProductsController extends Controller
         $product->name = $request->input('name');
         $product->supplier = $request->input('supplier');
         $product->description = $request->input('description');
-        $product->quantity = $request->input('quantity');
+        $product->quantity = 0;
         $product->price = $request->input('price');
         $product->reorderQuantity = $request->input('reorderQuantity');
         $product->save();
@@ -101,7 +100,6 @@ class ProductsController extends Controller
             'name' => 'required',
             'supplier' => 'required',
             'description' => 'required',
-            'quantity' => 'required|integer',
             'price' => 'required|integer',
             'reorderQuantity' => 'required|integer'
         ]);
@@ -110,7 +108,6 @@ class ProductsController extends Controller
         $product->name = $request->input('name');
         $product->supplier = $request->input('supplier');
         $product->description = $request->input('description');
-        $product->quantity = $request->input('quantity');
         $product->price = $request->input('price');
         $product->reorderQuantity = $request->input('reorderQuantity');
         $product->save();

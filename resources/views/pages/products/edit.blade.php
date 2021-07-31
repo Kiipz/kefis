@@ -17,16 +17,10 @@
                             @csrf
                             @method('PUT')
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group mb-3">
                                         <label for="name">Name</label>
                                         <input type="text" value="{{ $product->name }}" id="name" class="form-control" name="name" required autofocus>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group mb-3">
-                                        <label for="quantity">Quantity</label>
-                                        <input type="number" value="{{ $product->quantity }}" id="quantity" class="form-control" name="quantity" required autofocus>
                                     </div>
                                 </div>
                                 <div class="col-md-6">

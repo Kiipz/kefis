@@ -16,16 +16,10 @@
                         <form action="{{ asset('products') }}" method="post">
                             @csrf
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group mb-3">
                                         <label for="name">Name</label>
                                         <input type="text" placeholder="product name" id="name" class="form-control" name="name" required autofocus>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group mb-3">
-                                        <label for="quantity">Quantity</label>
-                                        <input type="number" placeholder="product quantity" id="quantity" class="form-control" name="quantity" required autofocus>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -65,6 +59,7 @@
                         </form>
                     </div>
                 </div>
+                <small><b>Note:</b> <i>The default quantity is <b>0</b> when adding a product</i></small>
             </div>
         </div>
     </div>

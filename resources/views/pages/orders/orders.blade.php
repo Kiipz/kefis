@@ -10,20 +10,49 @@
             <div class="container">
                 <div class="card">
                     <div class="card-header">
-                        <div class="row">
-                            <div class="col-6">
-                                <h4>Orders</h4>
-                            </div>
-                            <div class="col-6">
-                                <a style="float: right" class="btn btn-sm btn-primary" href="">
-                                    <i class="fas fa-plus-circle"></i>
-                                    Add Order
-                                </a>
-                            </div>
-                        </div>
+                        <h4>Orders</h4>
                     </div>
                     <div class="card-body">
-                        hello
+                        <table class="table">
+                            <thead class="theader">
+                                <tr class="text-center">
+                                    <th>#</th>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Supplier</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (count($orders)<1)
+                                    <tr>
+                                        <td class="text-center" colspan="6" style="color: #ffa500">
+                                            No product
+                                        </td>
+                                    </tr>
+                                @endif
+                                <?php $no=1; ?>
+                                @foreach ($orders as $order)
+                                    <tr class="text-center">
+                                        <td>{{ $no }}</td><?php $no++; ?>
+                                        <td>{{ $order->product }}</td>
+                                        <td>{{ $order->quantity }}</td>
+                                        <td>{{ $order->supplier }}</td>
+                                        <td style="color: {{($order->status=='unprocessed')?'red':'green' }}">
+                                            {{ $order->status }}
+                                        </td>
+                                        <td>
+                                            <form action="{{ asset('orders')}}/{{ $order->id }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-sm btn-outline-danger" type="submit"><i class="far fa-trash-alt"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

@@ -33,13 +33,14 @@
                                     <th>Quatity</th>
                                     <th>Automated reorder</th>
                                     <th>Supplier</th>
+                                    <th>Order</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @if (count($products)<1)
                                     <tr>
-                                        <td class="text-center" colspan="8" style="color: #ffa500">
+                                        <td class="text-center" colspan="9" style="color: #ffa500">
                                             No product
                                         </td>
                                     </tr>
@@ -55,12 +56,20 @@
                                         <td>{{ $product->reorderQuantity }}</td>
                                         <td>{{ $product->supplier }}</td>
                                         <td>
+                                            <form action="{{ asset('orders') }}" method="post">
+                                                @csrf
+                                                <input type="text" name="product" value="{{ $product->name }}" hidden>
+                                                <input type="text" name="supplier" value="{{ $product->supplier }}" hidden>
+                                                <a href="#" class="btn btn-sm btn-outline-info">Decrement--</a>
+                                                <button type="submit" class="btn btn-sm btn-outline-primary">Manual Order</button>
+                                            </form>
+                                        </td>
+                                        <td>
                                             <form action="{{ asset('products')}}/{{ $product->id }}" method="post">
                                                 <a href="{{asset('products')}}/{{$product->id}}/edit" class="btn btn-sm btn-outline-success"><i class="far fa-edit"></i></a>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-sm btn-outline-danger" type="submit"><i class="far fa-trash-alt"></i></button>
-                                                <a href="#" class="btn btn-sm btn-outline-primary">decrement--</a>
                                             </form>
                                         </td>
                                     </tr>
@@ -69,6 +78,7 @@
                         </table>
                     </div>
                 </div>
+                <small><b>Note:</b> <i>The default order quantity is <b>50</b></i></small>
             </div>
         </div>
     </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Order;
 
 class OrdersController extends Controller
 {
@@ -13,7 +14,8 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        return view('pages.orders.orders');
+        $orders = Order::all();
+        return view('pages.orders.orders')->with('orders', $orders);
     }
 
     /**
@@ -34,7 +36,19 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'product' => 'required',
+            'supplier' => 'required|email'
+        ]);
+
+        $order = new Order;
+        $order->product = $request->input('product');
+        $order->quantity = 50;
+        $order->supplier = $request->input('supplier');
+        $order->status = 'unprocessed';
+        $order->save();
+
+        return redirect('/products')->with('success', 'Order made successfully');
     }
 
     /**
@@ -79,6 +93,8 @@ class OrdersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $order = Order::find($id);
+        $order->delete();
+        return redirect('/orders')->with('success', 'Order deleted successfully');
     }
 }

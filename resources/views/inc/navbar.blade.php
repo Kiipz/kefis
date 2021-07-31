@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md">
     <div class="container">
-      <a class="navbar-brand" href="#">Kefis</a>
+      <a class="navbar-brand" href="#">Kefis Store</a>
       <span class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">   
         <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i>
       </span>
@@ -13,10 +13,10 @@
             <a class="nav-link {{ (request()->is('products*')) ? 'active' : '' }}" href="{{ asset('products') }}">Products</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ (request()->is('users*')) ? 'active' : '' }}" href="{{ asset('users') }}">Users</a>
+            <a class="nav-link {{ (request()->is('orders*')) ? 'active' : '' }}" href="{{ asset('orders') }}">Orders</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ (request()->is('orders*')) ? 'active' : '' }}" href="{{ asset('orders') }}">Orders</a>
+            <a class="nav-link {{ (request()->is('users*')) ? 'active' : '' }}" href="{{ asset('users') }}">Users</a>
           </li>
         </ul>
         <ul class="navbar-nav">
