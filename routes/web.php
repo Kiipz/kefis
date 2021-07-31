@@ -29,3 +29,9 @@ Route::get('signout', 'App\Http\Controllers\CustomAuthController@signOut')->name
 Route::resource('products', 'App\Http\Controllers\ProductsController')->middleware('auth');
 Route::resource('users', 'App\Http\Controllers\UsersController')->middleware('auth');
 Route::resource('orders', 'App\Http\Controllers\OrdersController')->middleware('auth');
+
+// warehouse operations routes
+Route::get('warehouse/orders', 'App\Http\Controllers\WarehouseController@orders');
+Route::put('warehouse/orders/{id}', 'App\Http\Controllers\WarehouseController@update');
+// decrement quantity route
+Route::post('products/decrement/{id}', 'App\Http\Controllers\WarehouseController@decrementQuantity');

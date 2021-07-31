@@ -7,6 +7,7 @@ use Hash;
 use Session;
 use App\Models\User;
 use App\Models\Product;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 
 class CustomAuthController extends Controller
@@ -27,8 +28,7 @@ class CustomAuthController extends Controller
    
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('dashboard')
-                        ->withSuccess('Signed in');
+            return redirect()->intended('dashboard')->withSuccess('Signed in');
         }
   
         return redirect("login")->withSuccess('Login details are not valid');
@@ -54,8 +54,7 @@ class CustomAuthController extends Controller
         $data = $request->all();
         $check = $this->create($data);
         
-        // edit this later
-        return redirect("dashboard")->withSuccess('You have signed-in');
+        return redirect("login")->withSuccess('You have signed-in');
     }
 
 
@@ -73,14 +72,21 @@ class CustomAuthController extends Controller
     public function dashboard()
     {
         if(Auth::check()){
-            $products = Product::all();
-            $users = User::all();
-            return view('pages.dashboard')->with(
-                array(
-                    'products' => $products,
-                    'users' => $users
-                )
-            );
+            if (Auth::user()->type == 'store-keeper') {
+                $products = Product::all();
+                $orders = Order::all();
+                $users = User::all();
+                return view('pages.dashboard')->with(
+                    array(
+                        'products' => $products,
+                        'orders' => $orders,
+                        'users' => $users
+                    )
+                );
+            } else {
+                return view('warehouse.dashboard');
+            }
+            
         }
   
         return redirect("login")->withSuccess('You are not allowed to access');

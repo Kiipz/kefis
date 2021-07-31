@@ -52,15 +52,22 @@
                                         <td>{{ $product->name }}</td>
                                         <td>{{ $product->description }}</td>
                                         <td>{{ $product->price }}</td>
-                                        <td>{{ $product->quantity }}</td>
+                                        <td style="color: {{ ($product->quantity<=$product->reorderQuantity)?'red':'green' }}">
+                                            {{ $product->quantity }}
+                                        </td>
                                         <td>{{ $product->reorderQuantity }}</td>
                                         <td>{{ $product->supplier }}</td>
-                                        <td>
+                                        <td style="display: flex">
+                                            <form action="{{ asset('products/decrement') }}/{{ $product->id }}" method="post">
+                                                @csrf
+                                                <input type="text" name="product" value="{{ $product->name }}" hidden>
+                                                <input type="text" name="supplier" value="{{ $product->supplier }}" hidden>
+                                                <button type="submit" class="btn btn-sm btn-outline-info mr-2">Decrement--</button>
+                                            </form>
                                             <form action="{{ asset('orders') }}" method="post">
                                                 @csrf
                                                 <input type="text" name="product" value="{{ $product->name }}" hidden>
                                                 <input type="text" name="supplier" value="{{ $product->supplier }}" hidden>
-                                                <a href="#" class="btn btn-sm btn-outline-info">Decrement--</a>
                                                 <button type="submit" class="btn btn-sm btn-outline-primary">Manual Order</button>
                                             </form>
                                         </td>

@@ -39,7 +39,7 @@
                             <i class="fas fa-music"></i>
                         </div>
                         <div class="">
-                            <h4>Orders <span>#</span></h4>
+                            <h4>Orders <span>{{ count($orders) }}</span></h4>
                         </div>
                     </div>
                     <a class="card-footer text-white clearfix small z-1" href="{{ url('orders') }}">
